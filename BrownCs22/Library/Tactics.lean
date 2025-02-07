@@ -6,3 +6,4 @@ import BrownCs22.Library.Tactic.Rewriting
 import BrownCs22.Library.Tactic.Sets
 
 import Mathlib.Tactic.Polyrith
+import Mathlib.Tactic.Positivity
