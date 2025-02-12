@@ -124,7 +124,6 @@ example (A B : Set U) : (A \ B)ᶜ = B ∪ Aᶜ := by
 
 We mentioned "De Morgan for quantifiers" in lecture.
 Here's a proof of one direction of this.
-The other direction is trickier: we need a new proof technique for it.
 
 -/
 
@@ -145,6 +144,34 @@ example (P : ℕ → Prop) : (¬ ∃ x, P x) ↔ (∀ x, ¬ P x)  := by
     eliminate hex with w hw     -- Then there is a witness `w` such that `P w` holds.
     have hnw : ¬ P w := hall w  -- But, from our first hypothesis, `¬ P w` also holds.
     contradiction }             -- Contradiction.
+
+
+/-
+
+The proof of the other direction is trickier -- it's a little "twisty"!
+We do *nested* proofs by contradiction.
+See if you can translate this formal proof into a natural language to make some sense of it.
+(But don't worry if you can't, it's tricky.)
+
+-/
+
+example (P : ℕ → Prop) : (¬ ∀ x, P x) ↔ (∃ x, ¬ P x)  := by
+  split_goal
+  { assume h_nall
+    by_contra h_nex
+    have hall : ∀ x : ℕ, P x
+    { fix x
+      by_contra h_npx
+      have h_ex : ∃ x, ¬ P x
+      { existsi x
+        assumption }
+      contradiction }
+    contradiction }
+  { assume h_ex
+    assume h_all
+    eliminate h_ex with x h_npx
+    have h_px : P x := h_all x
+    contradiction }
 
 /-
 
