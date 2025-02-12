@@ -81,7 +81,8 @@ Here's a proof using the set-element method:
 -/
 
 example (A B : Set U) : (A ∩ B)ᶜ = Aᶜ ∪ Bᶜ := by
-  ext x
+  extensionality
+  fix x
   split_goal
   { assume hx
     set_simplify
@@ -91,6 +92,7 @@ example (A B : Set U) : (A ∩ B)ᶜ = Aᶜ ∪ Bᶜ := by
     set_simplify
     rewrite not_and_or
     assumption }
+  done
 
 
 
@@ -106,12 +108,14 @@ for any `x`, `x ↔ x`, `x = x`, etc. are true.
 -/
 
 example (A B : Set U) : (A \ B)ᶜ = B ∪ Aᶜ := by
-  ext x
+  extensionality
+  fix x
   set_simplify
   rewrite not_and_or
   rewrite not_not
   rewrite or_comm
   reflexivity
+  done
 
 
 
@@ -144,6 +148,7 @@ example (P : ℕ → Prop) : (¬ ∃ x, P x) ↔ (∀ x, ¬ P x)  := by
     eliminate hex with w hw     -- Then there is a witness `w` such that `P w` holds.
     have hnw : ¬ P w := hall w  -- But, from our first hypothesis, `¬ P w` also holds.
     contradiction }             -- Contradiction.
+  done
 
 
 /-
@@ -172,6 +177,7 @@ example (P : ℕ → Prop) : (¬ ∀ x, P x) ↔ (∃ x, ¬ P x)  := by
     eliminate h_ex with x h_npx
     have h_px : P x := h_all x
     contradiction }
+  done
 
 /-
 
