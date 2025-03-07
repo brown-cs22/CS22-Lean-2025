@@ -22,7 +22,8 @@ First of all: we've mentioned before that Lean is in fact
 a programming language itself. Here's the `gcd` function
 we've been discussing, implementing Euclid's algorithm.
 
-(We could implement the extended Euclidean algorithm, the "pulverizer",
+(We could implement the extended Euclidean algorithm, 
+computing the weights for the integer linear combination,
 but let's keep it simple for now.)
 
 -/
